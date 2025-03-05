@@ -15,16 +15,16 @@ The traveler has a budget level of {budget}. Provide specific activities for eac
         response = self.client.chat(model="command-r-plus", message=prompt)
         return response.text.strip()
     
-    def _extract_json(self, text):
-        try:
-            cleaned_text = re.sub(r'[\x00-\x1F\x7F-\x9F]', '', text)
-            json_match = re.search(r'```json\n(.*?)\n```', cleaned_text, re.DOTALL)
-            
-            if json_match:
-                json_str = json_match.group(1)
-                json_str = json_str.replace('\\', '\\\\')
-                return json.loads(json_str)
-            return None
-        except Exception as e:
-            print(f"JSON Error: {str(e)}")
+    def _extract_json(self,text):
+        json_match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
+        if json_match:
+            json_string = json_match.group(1)
+            try:
+                json_data = json.loads(json_string)
+                return json_data
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+                return None
+        else:
+            print("No JSON found in the itinerary text.")
             return None
