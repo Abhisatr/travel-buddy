@@ -8,7 +8,6 @@ import folium
 from streamlit_folium import st_folium, folium_static
 from folium.plugins import MarkerCluster
 import polyline
-from fpdf import FPDF
 from datetime import datetime, timedelta
 from config import config
 
