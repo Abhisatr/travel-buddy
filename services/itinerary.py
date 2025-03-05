@@ -13,7 +13,7 @@ The traveler has a budget level of {budget}. Provide specific activities for eac
 (Note: first fully generate a normal itinerary with one location per section of the day. Then, also include a JSON version where each section (morning, midday, evening) has only one location per day.)
 """
         response = self.client.chat(model="command-r-plus", message=prompt)
-        return self._extract_json(response.text.strip())
+        return self.response.text.strip()
     
     def _extract_json(self, text):
         try:
