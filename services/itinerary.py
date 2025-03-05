@@ -15,6 +15,18 @@ class ItineraryGenerator:
         response = self.client.chat(model="command-r-plus", message=prompt)
         return self._extract_json(response.text)
     
+    
     def _extract_json(self, text):
-        match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
-        return json.loads(match.group(1)) if match else None
+        try:
+            cleaned_text = re.sub(r'[\x00-\x1F\x7F-\x9F]', '', text)
+            json_match = re.search(r'```json\n(.*?)\n```', cleaned_text, re.DOTALL)
+        
+            if json_match:
+                json_str = json_match.group(1).replace('\\', '\\\\')
+                return json.loads(json_str)
+            return None
+        except Exception as e:
+            print(f"JSON Parse Error: {str(e)}")
+            print(f"Problematic JSON: {json_match.group(1)[100:200] if json_match else 'No match'}")
+            return None
+    
