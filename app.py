@@ -33,7 +33,9 @@ def main():
                 PDFGenerator.create(itinerary, city, "itinerary.pdf")
                 with open("itinerary.pdf", "rb") as f:
                     st.download_button("Download PDF", f, file_name=f"{city}_itinerary.pdf")
-
+            else:
+                st.error("Failed to generate valid itinerary")
+                
         except Exception as e:
             st.error(f"Error: {str(e)}")
 
