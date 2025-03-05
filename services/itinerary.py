@@ -13,20 +13,20 @@ class ItineraryGenerator:
     (Note: first fully generate a normal itinerary with one location per section of the day. Then, also include a JSON version where each section (morning, midday, evening) has only one location per day.)
 """
         response = self.client.chat(model="command-r-plus", message=prompt)
-        return self._extract_json(response.text)
+        return self._extract_json(response.text.strip())
     
     
     def _extract_json(self, text):
-        try:
-            cleaned_text = re.sub(r'[\x00-\x1F\x7F-\x9F]', '', text)
-            json_match = re.search(r'```json\n(.*?)\n```', cleaned_text, re.DOTALL)
-        
-            if json_match:
-                json_str = json_match.group(1).replace('\\', '\\\\')
-                return json.loads(json_str)
-            return None
-        except Exception as e:
-            print(f"JSON Parse Error: {str(e)}")
-            print(f"Problematic JSON: {json_match.group(1)[100:200] if json_match else 'No match'}")
+        json_match = re.search(r'```json\n(.*?)\n```', itinerary_text, re.DOTALL)
+        if json_match:
+            json_string = json_match.group(1)
+            try:
+                json_data = json.loads(json_string)
+                return json_data
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+                return None
+        else:
+            print("No JSON found in the itinerary text.")
             return None
     
