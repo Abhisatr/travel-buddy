@@ -1,9 +1,7 @@
 
-🌍 Travel Buddy: AI travel planner using Cohere to auto-generate itineraries. Integrates Foursquare locations, WeatherAPI forecasts, and OSRM routing. Features interactive maps with optimized routes and 1-click PDF export. Mobile-friendly trip planning made easy!
-
-
-🌍 Travel Buddy - AI Travel Assistant
-
+🌍 Travel Buddy: AI travel planner 
+Using Cohere to auto-generate itineraries.
+Integrates Foursquare locations, WeatherAPI forecasts, and OSRM routing. Features interactive maps with optimized routes . Mobile-friendly trip planning made easy!
 
 
 An intelligent travel planning system that creates personalized itineraries using **Cohere's AI** and real-time data from **Foursquare**, **Google Maps**, and **WeatherAPI**.
@@ -14,7 +12,6 @@ An intelligent travel planning system that creates personalized itineraries usin
 - 🗺️ **Interactive Map Visualization** - Folium maps with optimal OSRM routing
 - ⛅ **6-Day Weather Forecast** - Integrated WeatherAPI predictions
 - 📸 **Automatic Place Images** - Google Custom Search image integration
-- 📥 **PDF Export** - Download printable itinerary documents
 - 📱 **Mobile-Optimized** - Full responsive design for all devices
 
 ## 🛠️ Installation
