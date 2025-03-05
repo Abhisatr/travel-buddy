@@ -186,23 +186,6 @@ def display_itinerary_with_images_and_weather(itinerary):
             st.write("----")
 
 
-# Function to save itinerary as PDF
-def save_itinerary_as_pdf(itinerary, city):
-    pdf = FPDF()
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-
-    pdf.cell(200, 10, txt=f"Travel Itinerary for {city}", ln=True, align='C')
-    pdf.ln(10)
-
-    for day, schedule in itinerary.items():
-        pdf.cell(200, 10, txt=f"{day}", ln=True)
-        for time, location in schedule.items():
-            pdf.cell(200, 10, txt=f"{time.capitalize()}: {location}", ln=True)
-        pdf.ln(5)
-
-    pdf.output("itinerary.pdf")
 
 # Main function for Streamlit app
 def main():
@@ -222,7 +205,7 @@ def main():
         if itinerary_json:
             display_itinerary_with_images_and_weather(itinerary_json)
             plot_itinerary_on_map(itinerary_json, city)
-            save_itinerary_as_pdf(itinerary_json, city)
+            
 
             
 if __name__ == "__main__":
